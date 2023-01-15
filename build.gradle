@@ -1,0 +1,155 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+buildscript {
+    ext.kotlinVersion ="1.7.0"
+
+    repositories {
+       
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+
+    }
+}
+allprojects {
+    repositories {
+
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '27.1.1'
+            }
+        }
+    }
+}
+
+
+
+
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.ugurkaya.innovaproject"
+        minSdk 23
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+        renderscriptTargetApi 30
+        renderscriptSupportModeEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures{
+        viewBinding true
+    }
+    dataBinding{
+        enabled = true
+    }
+    viewBinding {
+        enabled = true
+    }
+    aaptOptions {
+        cruncherEnabled = false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //noinspection GradleCompatible
+    implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.annotation:annotation:1.3.0'
+    //noinspection GradleCompatible
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation "androidx.core:core-ktx:1.7.0"
+    implementation 'androidx.core:core:1.7.0'
+    implementation "androidx.lifecycle:lifecycle-process:2.4.1"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    def lifecycle_version = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    //noinspection GradleDependency
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    api 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'androidx.multidex:multidex:2.0.0'
+    //retrofit
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+    // define any required OkHttp artifacts without version
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    implementation('com.github.bumptech.glide:glide:4.11.0@aar') {
+        transitive = true
+    }
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+}

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">innovaproject</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment_text">Home</string>
+    <string name="settings_fragment_text">Settings</string>
+    <string name="gps_control">gpscontrol</string>
+    <string name="wireless_and_networks">Wireless &amp; networks</string>
+    <string name="gps_text">GPS</string>
+    <string name="gps_enabled">enabled</string>
+    <string name="add_new_city_text">Yeni Şehir Ekle</string>
+    <string name="city_desc">Şehir: %1$s</string>
+    <string name="weather_api">07e4d8ed9f97e6fc7bfff233c8056dd5</string>
+    <string name="temp_min_max">%1$s / %2$s</string>
+    <string name="humidity_text">Humidity: \%% %1$s</string>
+    <string name="situation_text">Situation: %1$s</string>
+    <string name="pressure_text">Pressure: %1$s</string>
+</resources>
